@@ -200,29 +200,33 @@ ListNode *List::merge(vector<ListNode *> vec)
 }
 
 //链表排序
-void List::bubbleSort(ListNode **head)
+void List::bubbleSort(ListNode *head)
 {
-	if ((*head) == nullptr || (*head)->next == nullptr)
+	if (head == nullptr || head->next == nullptr)
 	{
 		return;
 	}
 
 	ListNode *p;
 	ListNode *q;
-	bool sorted = false;
-	for (p = *head; p != nullptr; p = p->next)
+	ListNode *tail = nullptr;
+	bool sorted;  //用于判断是否提前完成冒泡过程
+
+	for (p = head; p->next != tail; p = p->next)
 	{
-		for (q = p->next; q != nullptr; q = q->next)
+		sorted = true;
+		for (q = head; q->next != tail; q = q->next)
 		{
-			if (p->data > q->data)
+			if (q->data > q->next->data)
 			{
-				int tmp = p->data;
-				p->data = q->data;
+				int tmp = q->next->data;
+				q->next->data = q->data;
 				q->data = tmp;
 				sorted = false;
 			}
 		}
-		if (sorted)
+		tail = q; //此时已经进行了一轮冒泡，将尾指针向前移一位
+		if(tail == head ) //如果经过几次冒泡后列表已经有序，或者走完所有冒泡次数后tail指向了头指针，则跳出循环
 		{
 			break;
 		}
@@ -250,7 +254,7 @@ int main()
 	ListNode *head1 = li.initList(10); //初始化一个列表head1
 	cout << "print head1:" << endl;
 	li.printList(head1);
-	li.bubbleSort(&head1); //对列表head1进行冒泡排序
+	li.bubbleSort(head1); //对列表head1进行冒泡排序
 	cout << "print bubble sorted head1:" << endl;
 	li.printList(head1);
 

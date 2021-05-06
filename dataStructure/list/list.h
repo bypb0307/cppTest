@@ -1,7 +1,7 @@
 /*
  * @Author: chenq
  * @Date: 2020-12-03 23:33:00
- * @LastEditTime: 2021-05-06 15:38:53
+ * @LastEditTime: 2021-05-06 16:28:25
  * @Descripttion: 链表反转，合并有序链表
  */
 #include <iostream>
@@ -37,6 +37,6 @@ public:
 	ListNode* merge(vector<ListNode*> vec);	//合并多个有序链表
 	
 	
-	void bubbleSort(ListNode** head);	//链表排序
+	void bubbleSort(ListNode* head);	//链表排序
 	void printList(ListNode* head);		//打印链表
 };
