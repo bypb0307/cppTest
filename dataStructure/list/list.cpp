@@ -210,23 +210,29 @@ void List::bubbleSort(ListNode *head)
 	ListNode *p;
 	ListNode *q;
 	ListNode *tail = nullptr;
-	bool sorted;  //用于判断是否提前完成冒泡过程
+	bool sorted; //用于判断是否提前完成冒泡过程
+	int i = 1;	 //计数，冒泡的次数
 
-	for (p = head; p->next != tail; p = p->next)
+	while (true)
 	{
 		sorted = true;
-		for (q = head; q->next != tail; q = q->next)
+		p = head;
+		while (p->next != tail)
 		{
-			if (q->data > q->next->data)
+			if (p->data > p->next->data)
 			{
-				int tmp = q->next->data;
-				q->next->data = q->data;
-				q->data = tmp;
+				int tmp = p->next->data;
+				p->next->data = p->data;
+				p->data = tmp;
 				sorted = false;
 			}
+			p = p->next;
 		}
-		tail = q; //此时已经进行了一轮冒泡，将尾指针向前移一位
-		if(tail == head ) //如果经过几次冒泡后列表已经有序，或者走完所有冒泡次数后tail指向了头指针，则跳出循环
+		cout << "第" << i++ << "次冒泡结果:" << endl;
+		printList(head);
+
+		tail = p;
+		if (p == head || sorted) //完成冒泡排序，tail指针指向头指针，或者提前完成排序，sorted=true
 		{
 			break;
 		}
@@ -258,38 +264,38 @@ int main()
 	cout << "print bubble sorted head1:" << endl;
 	li.printList(head1);
 
-	ListNode *head1Rev1 = li.reverseList1(head1); //逆转链表head1，不改变原有链表
-	cout << "print head1 reverseList1:" << endl;
-	li.printList(head1);
-	cout << "print head1Rev1 after reverseList1:" << endl;
-	li.printList(head1Rev1);
+	// ListNode *head1Rev1 = li.reverseList1(head1); //逆转链表head1，不改变原有链表
+	// cout << "print head1 reverseList1:" << endl;
+	// li.printList(head1);
+	// cout << "print head1Rev1 after reverseList1:" << endl;
+	// li.printList(head1Rev1);
 
-	ListNode *head1Rev2 = li.reverseList2(head1); //直接在原有链表基础上逆转链表head1，会改变head1的原有结构
-	cout << "print head1 reverseList2:" << endl;
-	li.printList(head1);
-	cout << "print head1Rev1 after reverseList2:" << endl;
-	li.printList(head1Rev2);
+	// ListNode *head1Rev2 = li.reverseList2(head1); //直接在原有链表基础上逆转链表head1，会改变head1的原有结构
+	// cout << "print head1 reverseList2:" << endl;
+	// li.printList(head1);
+	// cout << "print head1Rev1 after reverseList2:" << endl;
+	// li.printList(head1Rev2);
 
-	cout << "merge two list............................." << endl
-		 << endl;
+	// cout << "merge two list............................." << endl
+	// 	 << endl;
 
-	ListNode *head2 = li.initList(10); //初始化一个列表head2
-	li.bubbleSort(&head2);			   //对列表head2进行冒泡排序
-	cout << "print sorted list head2:" << endl;
-	li.printList(head2);
+	// ListNode *head2 = li.initList(10); //初始化一个列表head2
+	// li.bubbleSort(&head2);			   //对列表head2进行冒泡排序
+	// cout << "print sorted list head2:" << endl;
+	// li.printList(head2);
 
-	ListNode *head3 = li.initList(10); //初始化一个列表head3
-	li.bubbleSort(&head3);			   //对列表head3进行冒泡排序
-	cout << "print sorted list head3:" << endl;
-	li.printList(head3);
+	// ListNode *head3 = li.initList(10); //初始化一个列表head3
+	// li.bubbleSort(&head3);			   //对列表head3进行冒泡排序
+	// cout << "print sorted list head3:" << endl;
+	// li.printList(head3);
 
-	ListNode *head23 = li.mergeTwoList4(head2, head3); //测试合并两个有序链表 mergeTwoList1 mergeTwoList2 mergeTwoList3
-	cout << "print merged list head23:" << endl;
-	li.printList(head23);
-	cout << "print merged head2:" << endl;
-	li.printList(head2);
-	cout << "print merged head3:" << endl;
-	li.printList(head3);
+	// ListNode *head23 = li.mergeTwoList4(head2, head3); //测试合并两个有序链表 mergeTwoList1 mergeTwoList2 mergeTwoList3
+	// cout << "print merged list head23:" << endl;
+	// li.printList(head23);
+	// cout << "print merged head2:" << endl;
+	// li.printList(head2);
+	// cout << "print merged head3:" << endl;
+	// li.printList(head3);
 
 	return 0;
 }
